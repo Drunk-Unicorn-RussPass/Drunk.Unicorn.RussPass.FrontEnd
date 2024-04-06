@@ -27,5 +27,15 @@ module.exports = {
     return config;
   },
 
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'fakeimg.pl',
+        port: '',
+      },
+    ],
+  },
+
   // ...other config
 };

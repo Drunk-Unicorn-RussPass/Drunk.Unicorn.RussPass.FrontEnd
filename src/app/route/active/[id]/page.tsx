@@ -8,7 +8,6 @@ import { Container } from '@/components/ui/Layout/Container/Container';
 import { Toggler } from '@/components/ui/Toggler/Toggler';
 import { EditRouteButton } from '@/components/EditRouteButton/EditRouteButton';
 import { HiddenPlacesCount } from '@/components/HiddenPlacesCount/HiddenPlacesCount';
-import { RouteItem } from '@/components/RouteItem/RouteItem';
 import { LocationProcessStatuses } from '@/apollo/types';
 import { StartRouteButton } from '@/components/StartRouteButton/StartRouteButton';
 import { RouteItemsList } from '@/components/RouteItemsList/RouteItemsList';
@@ -59,7 +58,7 @@ export default function RouteActive({}: RouteActiveProps) {
               processStatus: LocationProcessStatuses.noPassed,
             },
             {
-              id: 123,
+              id: 145,
               name: 'Парк Горького',
               address: 'ул Волхонка, 15, Москва ',
               category: 'Парки',

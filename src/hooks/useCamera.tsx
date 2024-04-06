@@ -7,19 +7,20 @@ import {
   useState,
 } from 'react';
 
+type ImgSrcType = string | ArrayBuffer | null | undefined;
+type WrapperType = FC<PropsWithChildren>;
+
 export const useCamera = () => {
-  const [imgSrc, setImgSrc] = useState<string | ArrayBuffer | null | undefined>(
-    null,
-  );
+  const [imgSrc, setImgSrc] = useState<ImgSrcType>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const inputId = useId();
 
-  const onChange = (event: ChangeEvent) => {
-    // const file = event.target?.files[0];
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target?.files?.[0];
 
-    // if (!file.type.startsWith('image/')) {
-    //   return;
-    // }
+    if (!file?.type.startsWith('image/')) {
+      return;
+    }
 
     const reader = new FileReader();
     reader.onload = function (e) {
@@ -28,36 +29,29 @@ export const useCamera = () => {
       setImgSrc(imgSrc);
     };
 
-    // reader.readAsDataURL(file);
+    reader.readAsDataURL(file);
   };
 
   const onClick = () => {
-    console.log('onClick', inputRef.current);
     inputRef.current?.click();
   };
 
-  const Wrapper: FC<PropsWithChildren> = ({ children }) => {
-    // @ts-ignore
+  const Wrapper: WrapperType = ({ children }) => {
     return (
-      <label>
-        {children}
+      <>
+        <label htmlFor={inputId}>{children}</label>
         <input
           id={inputId}
-          className={'absolute hidden'}
+          type={'file'}
+          className={'hidden'}
           accept="image/*"
-          // capture="camera"
+          capture="environment"
           onChange={onChange}
           ref={inputRef}
         />
-      </label>
-      // <label htmlFor={inputId}>
-      // </label>
+      </>
     );
   };
 
-  return [Wrapper, imgSrc, onClick] as [
-    FC<PropsWithChildren>,
-    string | ArrayBuffer | null | undefined,
-    () => void,
-  ];
+  return [Wrapper, imgSrc, onClick] as [WrapperType, ImgSrcType, () => void];
 };
