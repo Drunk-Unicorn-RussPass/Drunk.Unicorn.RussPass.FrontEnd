@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'SuisseIntl';
+    src: url('/fonts/Suisse Intl/SuisseIntl-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SuisseIntl';
+    src: url('/fonts/Suisse Intl/SuisseIntl-Medium.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SuisseIntl';
+    src: url('/fonts/Suisse Intl/SuisseIntl-Bold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'ProtoGrotesk';
+    src: url('/fonts/Proto Grotesk/ProtoGrotesk-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
