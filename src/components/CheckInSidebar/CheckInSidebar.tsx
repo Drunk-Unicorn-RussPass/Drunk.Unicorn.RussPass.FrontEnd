@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import Sheet from 'react-modal-sheet';
 import { Container } from '@/components/ui/Layout/Container/Container';
 import { BaseButtons } from '@/components/ui/Buttons/BaseButton/BaseButtons';
@@ -13,7 +13,7 @@ export const CheckInSidebar: FC<CheckInSidebarProps> = ({
   isOpen,
   onClose,
 }) => {
-  const [CameraWrapper, imgSrc] = useCamera();
+  const [CameraWrapper, imgSrc, onClick] = useCamera();
 
   // @ts-ignore
   return (
@@ -47,7 +47,7 @@ export const CheckInSidebar: FC<CheckInSidebarProps> = ({
                   <CameraWrapper>
                     <BaseButtons
                       className={'w-full h-12 text-base font-semibold'}
-                      onClick={() => {}}
+                      onClick={onClick}
                       centeredContent
                     >
                       <span>Снять фото</span>

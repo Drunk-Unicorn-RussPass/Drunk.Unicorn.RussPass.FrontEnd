@@ -14,12 +14,14 @@ import { StartRouteButton } from '@/components/StartRouteButton/StartRouteButton
 import { RouteItemsList } from '@/components/RouteItemsList/RouteItemsList';
 
 type RouteActiveProps = {
-  id: number;
+  params: {
+    id: string;
+  };
 };
 
 const tabs = ['План', 'На карте'];
 
-export default function RouteActive({ id }: RouteActiveProps) {
+export default function RouteActive({}: RouteActiveProps) {
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
   return (

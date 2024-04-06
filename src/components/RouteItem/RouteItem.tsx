@@ -6,6 +6,7 @@ import {
 } from '@/apollo/types';
 import { BaseButtons } from '@/components/ui/Buttons/BaseButton/BaseButtons';
 import { CheckInSidebar } from '@/components/CheckInSidebar/CheckInSidebar';
+import Image from 'next/image';
 
 export type BaseRouteItemProps = {
   location: LocationProcessType;
@@ -18,7 +19,11 @@ const BaseRouteItem: FC<BaseRouteItemProps> = ({
 }) => {
   return (
     <div className={'flex gap-4 relative'}>
-      <img src={location.image} className={'size-[64px] rounded-[12px]'} />
+      <Image
+        alt={'image'}
+        src={location.image}
+        className={'size-[64px] rounded-[12px]'}
+      />
 
       <div className={'flex flex-col justify-between'}>
         <div className={'text-natural-3 text-xs'}>
