@@ -5,38 +5,34 @@ import HeartIcon from '@/assets/icons/heart.svg';
 import BurgerIcon from '@/assets/icons/burger.svg';
 import RouteIcon from '@/assets/icons/route.svg';
 import { RootRoutes } from '@/app/routes';
+import Link from 'next/link';
 
 export type RoutsType = {
   icon: ReactNode;
   name: string;
-  path: string;
-  id: RootRoutes;
+  path: RootRoutes;
 };
 
 const routs: RoutsType[] = [
   {
     icon: <LogoIcon />,
     name: 'Главная',
-    path: '/',
-    id: RootRoutes.main,
+    path: RootRoutes.main,
   },
   {
     icon: <BurgerIcon />,
     name: 'Каталог',
-    path: '/',
-    id: RootRoutes.catalog,
+    path: RootRoutes.catalog,
   },
   {
     icon: <RouteIcon />,
     name: 'Маршрут',
-    path: '/',
-    id: RootRoutes.routes,
+    path: RootRoutes.routes,
   },
   {
     icon: <HeartIcon />,
     name: 'Избранное',
-    path: '/',
-    id: RootRoutes.favourites,
+    path: RootRoutes.favourites,
   },
 ];
 
@@ -47,22 +43,25 @@ type RouteItemProps = {
 
 const RouteItem: FC<RouteItemProps> = ({ route, isSelected }) => {
   return (
-    <li
-      className={cx('flex flex-col items-center text-xs leading-snug', {
-        'text-natural-1': isSelected,
-        'text-natural-4': !isSelected,
-      })}
-    >
-      <span className={'pb-1'}>{route.icon}</span> <span>{route.name}</span>
+    <li>
+      <Link
+        href={`/${route.path}`}
+        className={cx('flex flex-col items-center text-xs leading-snug', {
+          'text-natural-1': isSelected,
+          'text-natural-4': !isSelected,
+        })}
+      >
+        <span className={'pb-1'}>{route.icon}</span> <span>{route.name}</span>
+      </Link>
     </li>
   );
 };
 
 export type TapBarProps = {
-  currentRouteId?: RootRoutes;
+  currentRoutePath?: RootRoutes;
 };
 
-export const TapBar: FC<TapBarProps> = ({ currentRouteId }) => {
+export const TapBar: FC<TapBarProps> = ({ currentRoutePath }) => {
   return (
     <ul className={'grid grid-cols-4 pt-1.5 pb-3'}>
       {routs.map((route) => {
@@ -70,7 +69,7 @@ export const TapBar: FC<TapBarProps> = ({ currentRouteId }) => {
           <RouteItem
             route={route}
             key={route.name}
-            isSelected={route.id === currentRouteId}
+            isSelected={route.path === currentRoutePath}
           />
         );
       })}

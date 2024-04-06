@@ -1,6 +1,6 @@
 export enum RootRoutes {
-  main = 'main',
+  main = '',
   catalog = 'catalog',
-  routes = 'routes',
+  routes = 'route',
   favourites = 'favourites',
 }
