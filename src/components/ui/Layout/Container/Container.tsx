@@ -1,5 +1,13 @@
 import { FC, PropsWithChildren } from 'react';
+import cx from 'classnames';
 
-export const Container: FC<PropsWithChildren> = ({ children }) => {
-  return <div className={'w-full px-4'}>{children}</div>;
+export type ContainerProps = {
+  className?: string;
+};
+
+export const Container: FC<PropsWithChildren<ContainerProps>> = ({
+  children,
+  className,
+}) => {
+  return <div className={cx('w-full px-4', className)}>{children}</div>;
 };

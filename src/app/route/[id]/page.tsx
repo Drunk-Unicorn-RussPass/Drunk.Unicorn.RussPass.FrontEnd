@@ -7,6 +7,7 @@ import { BottomBar } from '@/components/BottomBar/BottomBar';
 import { Container } from '@/components/ui/Layout/Container/Container';
 import { Toggler } from '@/components/ui/Toggler/Toggler';
 import { EditRouteButton } from '@/components/EditRouteButton/EditRouteButton';
+import { HiddenPlacesCount } from '@/components/HiddenPlacesCount/HiddenPlacesCount';
 
 type Props = {
   id: number;
@@ -34,6 +35,9 @@ export default function Page({ id }: Props) {
           onChangeVariant={setActiveTab}
           activeVariant={activeTab}
         />
+        <div className={'py-3'}>
+          <HiddenPlacesCount count={1} />
+        </div>
       </Container>
       <BottomBar />
     </main>

@@ -21,9 +21,12 @@ export const Toggler: FC<TogglerProps> = ({
       {variants.map((variant) => {
         return (
           <button
-            className={cx('w-full flex justify-center py-2 rounded-[8px]', {
-              'bg-natural-8 shadow-sm': variant === activeVariant,
-            })}
+            className={cx(
+              'w-full flex justify-center py-2 rounded-[8px] transition',
+              {
+                'bg-natural-8 shadow-sm': variant === activeVariant,
+              },
+            )}
             key={variant}
             onClick={() => onChangeVariant(variant)}
           >

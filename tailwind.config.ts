@@ -53,6 +53,11 @@ const config: Config = {
         success: {
           1: '#007470',
         },
+        pink: {
+          1: '#FFE9FB',
+          2: '#FFDEF9',
+          3: '#F840D7',
+        },
       },
     },
   },
