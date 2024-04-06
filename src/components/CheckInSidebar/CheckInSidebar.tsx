@@ -4,10 +4,12 @@ import { Container } from '@/components/ui/Layout/Container/Container';
 import { BaseButtons } from '@/components/ui/Buttons/BaseButton/BaseButtons';
 import { useCamera } from '@/hooks/useCamera';
 import Image from 'next/image';
+import { CheckInTask } from '@/components/CheckInTask/CheckInTask';
 
 export type CheckInSidebarProps = {
   isOpen: boolean;
   onClose: () => void;
+  locationName: string;
 };
 
 const buttonClass = 'w-full h-12 text-base font-semibold';
@@ -15,6 +17,7 @@ const buttonClass = 'w-full h-12 text-base font-semibold';
 export const CheckInSidebar: FC<CheckInSidebarProps> = ({
   isOpen,
   onClose,
+  locationName,
 }) => {
   const [CameraWrapper, imgSrc, onClick] = useCamera();
 
@@ -22,7 +25,7 @@ export const CheckInSidebar: FC<CheckInSidebarProps> = ({
     <div>
       <Sheet isOpen={isOpen} onClose={onClose} detent={'content-height'}>
         <Sheet.Container>
-          <Container className={'border-b border-natural-6 mb-4'}>
+          <Container className={'border-b border-natural-6'}>
             <div className={'flex justify-between items-center pt-5 pb-3'}>
               <h2 className={'font-protoGrotesk text-xl'}>Подтверди шаг</h2>
 
@@ -49,6 +52,9 @@ export const CheckInSidebar: FC<CheckInSidebarProps> = ({
           <Sheet.Content>
             <Container className={'h-full'}>
               <div className={'w-full flex flex-col h-full pb-5'}>
+                <div className={'py-4'}>
+                  <CheckInTask locationName={locationName} />
+                </div>
                 <div
                   className={
                     'mb-[46px] relative w-full h-[350px] flex items-center justify-center'

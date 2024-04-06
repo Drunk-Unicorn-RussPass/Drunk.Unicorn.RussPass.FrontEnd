@@ -146,6 +146,7 @@ export const RouteItem: FC<RouteItem> = ({ location }) => {
       <CheckInSidebar
         isOpen={inCheckIn}
         onClose={() => setInCheckIn(false)}
+        locationName={location.name}
       ></CheckInSidebar>
     </>
   );
