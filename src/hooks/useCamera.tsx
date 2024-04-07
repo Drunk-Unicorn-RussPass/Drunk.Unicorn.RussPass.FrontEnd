@@ -2,6 +2,7 @@ import {
   ChangeEvent,
   FC,
   PropsWithChildren,
+  useCallback,
   useId,
   useRef,
   useState,
@@ -10,11 +11,15 @@ import {
 type ImgSrcType = string | ArrayBuffer | null | undefined;
 type WrapperType = FC<PropsWithChildren>;
 
+const initialState = {
+  src: '',
+  name: '',
+};
+
 export const useCamera = () => {
-  const [imgData, setImgData] = useState<{ src: ImgSrcType; name: string }>({
-    src: '',
-    name: '',
-  });
+  const [imgData, setImgData] = useState<{ src: ImgSrcType; name: string }>(
+    initialState,
+  );
   const inputRef = useRef<HTMLInputElement>(null);
   const inputId = useId();
 
@@ -40,6 +45,10 @@ export const useCamera = () => {
     inputRef.current?.click();
   };
 
+  const resetImg = useCallback(() => {
+    setImgData(initialState);
+  }, []);
+
   const Wrapper: WrapperType = ({ children }) => {
     return (
       <>
@@ -59,9 +68,10 @@ export const useCamera = () => {
     );
   };
 
-  return [Wrapper, imgData, onClick] as [
+  return [Wrapper, imgData, onClick, resetImg] as [
     WrapperType,
     { src: ImgSrcType; name: string },
+    () => void,
     () => void,
   ];
 };

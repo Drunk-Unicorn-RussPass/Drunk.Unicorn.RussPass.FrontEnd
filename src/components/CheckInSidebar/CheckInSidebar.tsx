@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import Sheet from 'react-modal-sheet';
 import { Container } from '@/components/ui/Layout/Container/Container';
 import { BaseButtons } from '@/components/ui/Buttons/BaseButton/BaseButtons';
@@ -27,7 +27,7 @@ export const CheckInSidebar: FC<CheckInSidebarProps> = ({
   onCheckinUpload,
   onLocationSkip,
 }) => {
-  const [CameraWrapper, img, onClick] = useCamera();
+  const [CameraWrapper, img, onClick, resetImg] = useCamera();
   const onUpload = async () => {
     // const res = await checkIn(img.src, img.name, locationId);
     setTimeout(() => {
@@ -35,6 +35,12 @@ export const CheckInSidebar: FC<CheckInSidebarProps> = ({
       onCheckinUpload(locationId);
     }, 500);
   };
+
+  useEffect(() => {
+    return () => {
+      resetImg();
+    };
+  }, [locationId, resetImg]);
 
   return (
     <div>

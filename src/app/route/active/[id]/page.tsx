@@ -36,13 +36,18 @@ export default function RouteActive({}: RouteActiveProps) {
   const [activeTab, setActiveTab] = useState(tabs[0]);
   const [inProgress, setInProgress] = useState(false);
   const [currentLocation, setCurrentLocation] = useState<number>(0);
+  const [skippedLocations, setSkippedLocations] = useState<number[]>([]);
   const passedLocationsCount = currentLocation - 1;
+  let verifyPassedLocationCount =
+    passedLocationsCount - skippedLocations.length;
+  verifyPassedLocationCount =
+    verifyPassedLocationCount < 0 ? 0 : verifyPassedLocationCount;
 
   const processTrack: ProcessTrack = {
     trackId: 1,
     kk: passedLocationsCount * 1999,
     countPassedLocations: 0,
-    passedCoins: passedLocationsCount * 20,
+    passedCoins: verifyPassedLocationCount * 20,
     passedSecrets: 0,
     steps: passedLocationsCount * 1024,
     processStatus: inProgress
@@ -141,11 +146,12 @@ export default function RouteActive({}: RouteActiveProps) {
   })();
   const isTrackInProcess =
     processTrack.processStatus === ProcessTrackStatus.inWay;
-  const onNextLocation = async (prevLocationId: number) => {
+  const onNextLocation = (prevLocationId: number) => {
     setCurrentLocation(prevLocationId + 1);
   };
-  const onSkipLocation = async (id: number) => {
+  const onSkipLocation = (id: number) => {
     //   вызываем метод api
+    setSkippedLocations((prev) => [...prev, id]);
     onNextLocation(id);
   };
   const onCheckinUpload = (locationId: number) => {
@@ -194,11 +200,12 @@ export default function RouteActive({}: RouteActiveProps) {
           </div>
         ) : (
           <>
-            {processTrack.processStatus === ProcessTrackStatus.none && (
-              <div className={'py-3'}>
-                <HiddenPlacesCount count={secretsAmount} />
-              </div>
-            )}
+            {processTrack.processStatus === ProcessTrackStatus.none &&
+              Boolean(secretsAmount) && (
+                <div className={'py-3'}>
+                  <HiddenPlacesCount count={secretsAmount} />
+                </div>
+              )}
 
             <RouteItemsList
               locations={processLocations}
