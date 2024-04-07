@@ -18,6 +18,7 @@ import { ControlRouteButton } from '@/components/ControlRouteButton/ControlRoute
 import { RouteAnalyticBar } from '@/components/RouteAnalyticBar/RouteAnalyticBar';
 import Image from 'next/image';
 import mapImg from '@/assets/img/map.jpg';
+import parkImg from '@/assets/img/park.png';
 
 type RouteActiveProps = {
   params: {
@@ -48,7 +49,7 @@ export default function RouteActive({}: RouteActiveProps) {
       address: 'ул Волхонка, 15, Москва ',
       category: 'Парки',
       order: 1,
-      image: 'http://fakeimg.pl/64x64',
+      image: parkImg.src,
       isVisible: true,
       reward: 20,
       processStatus: LocationProcessStatuses.passed,
@@ -60,7 +61,7 @@ export default function RouteActive({}: RouteActiveProps) {
       address: 'ул Волхонка, 15, Москва ',
       category: 'Парки',
       order: 1,
-      image: 'http://fakeimg.pl/64x64',
+      image: parkImg.src,
       isVisible: true,
       reward: 20,
       processStatus: LocationProcessStatuses.verificationProcess,
@@ -72,7 +73,7 @@ export default function RouteActive({}: RouteActiveProps) {
       address: 'ул Волхонка, 15, Москва ',
       category: 'Парки',
       order: 1,
-      image: 'http://fakeimg.pl/64x64',
+      image: parkImg.src,
       isVisible: true,
       reward: 20,
       processStatus: LocationProcessStatuses.none,
@@ -84,7 +85,7 @@ export default function RouteActive({}: RouteActiveProps) {
       address: 'ул Волхонка, 15, Москва ',
       category: 'Парки',
       order: 1,
-      image: 'http://fakeimg.pl/64x64',
+      image: parkImg.src,
       isVisible: true,
       reward: 20,
       processStatus: LocationProcessStatuses.none,
