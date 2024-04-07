@@ -17,7 +17,7 @@ import { RouteProgress } from '@/components/RouteProgress/RouteProgress';
 import { ControlRouteButton } from '@/components/ControlRouteButton/ControlRouteButton';
 import { RouteAnalyticBar } from '@/components/RouteAnalyticBar/RouteAnalyticBar';
 import Image from 'next/image';
-import mapImg from '@/assets/img/map.png';
+import mapImg from '@/assets/img/map.jpg';
 
 type RouteActiveProps = {
   params: {
