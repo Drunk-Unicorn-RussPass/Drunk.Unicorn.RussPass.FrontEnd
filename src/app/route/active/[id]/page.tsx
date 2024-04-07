@@ -19,6 +19,10 @@ import { RouteAnalyticBar } from '@/components/RouteAnalyticBar/RouteAnalyticBar
 import Image from 'next/image';
 import mapImg from '@/assets/img/map.jpg';
 import parkImg from '@/assets/img/park.png';
+import bridgeImg from '@/assets/img/bridge.png';
+import museumImg from '@/assets/img/museum.png';
+import nonSoloImg from '@/assets/img/non-solo.png';
+import unicornImg from '@/assets/img/unicorn.png';
 
 type RouteActiveProps = {
   params: {
@@ -31,20 +35,23 @@ const tabs = ['План', 'На карте'];
 export default function RouteActive({}: RouteActiveProps) {
   const [activeTab, setActiveTab] = useState(tabs[0]);
   const [inProgress, setInProgress] = useState(false);
+  const [currentLocation, setCurrentLocation] = useState<number>(0);
+  const passedLocationsCount = currentLocation - 1;
+
   const processTrack: ProcessTrack = {
-    trackId: 123,
-    kk: 123,
-    countPassedLocations: 123,
-    passedCoins: 123,
-    passedSecrets: 123,
-    steps: 123,
+    trackId: 1,
+    kk: passedLocationsCount * 1999,
+    countPassedLocations: 0,
+    passedCoins: passedLocationsCount * 20,
+    passedSecrets: 0,
+    steps: passedLocationsCount * 1024,
     processStatus: inProgress
       ? ProcessTrackStatus.inWay
       : ProcessTrackStatus.none,
   };
-  const processLocations: LocationProcessType[] = [
+  let processLocations: LocationProcessType[] = [
     {
-      id: 12366,
+      id: 1,
       name: 'Парк Горького',
       address: 'ул Волхонка, 15, Москва ',
       category: 'Парки',
@@ -56,42 +63,71 @@ export default function RouteActive({}: RouteActiveProps) {
       isSecret: false,
     },
     {
-      id: 145,
+      id: 2,
       name: 'Памятник единоржки',
       address: 'ул Волхонка, 15, Москва ',
-      category: 'Парки',
+      category: 'Памятники',
       order: 1,
-      image: parkImg.src,
+      image: unicornImg.src,
       isVisible: true,
       reward: 20,
       processStatus: LocationProcessStatuses.verificationProcess,
-      isSecret: true,
+      isSecret: false,
     },
     {
-      id: 123,
-      name: 'Парк Горького',
+      id: 3,
+      name: 'Крымский мост',
       address: 'ул Волхонка, 15, Москва ',
-      category: 'Парки',
+      category: 'Архитектура',
       order: 1,
-      image: parkImg.src,
+      image: bridgeImg.src,
       isVisible: true,
       reward: 20,
       processStatus: LocationProcessStatuses.none,
-      isSecret: true,
+      isSecret: false,
     },
     {
-      id: 123996,
-      name: 'Парк Горького',
+      id: 4,
+      name: 'None solo',
       address: 'ул Волхонка, 15, Москва ',
-      category: 'Парки',
+      category: 'Рестораны',
       order: 1,
-      image: parkImg.src,
+      image: nonSoloImg.src,
+      isVisible: true,
+      reward: 20,
+      processStatus: LocationProcessStatuses.none,
+      isSecret: false,
+    },
+    {
+      id: 5,
+      name: 'Музей парка горького',
+      address: 'ул Волхонка, 15, Москва ',
+      category: 'Музеи',
+      order: 1,
+      image: museumImg.src,
       isVisible: true,
       reward: 20,
       processStatus: LocationProcessStatuses.none,
       isSecret: false,
     },
   ];
+  processLocations = processLocations.map((location) => {
+    let status = LocationProcessStatuses.none;
+
+    if (!currentLocation || location.id > currentLocation) {
+      status = LocationProcessStatuses.none;
+    } else if (currentLocation === location.id) {
+      status = LocationProcessStatuses.inWay;
+    } else if (currentLocation > location.id) {
+      status = LocationProcessStatuses.passed;
+    }
+
+    return {
+      ...location,
+      processStatus: status,
+    };
+  });
+
   const secretsAmount = (() => {
     let amount = 0;
 
@@ -106,7 +142,7 @@ export default function RouteActive({}: RouteActiveProps) {
   const isTrackInProcess =
     processTrack.processStatus === ProcessTrackStatus.inWay;
   const onNextLocation = async (prevLocationId: number) => {
-    //   обновляем процессы
+    setCurrentLocation(prevLocationId + 1);
   };
   const onSkipLocation = async (id: number) => {
     //   вызываем метод api
@@ -141,8 +177,8 @@ export default function RouteActive({}: RouteActiveProps) {
         {processTrack.processStatus !== ProcessTrackStatus.none && (
           <div className={'pt-3 pb-2'}>
             <RouteProgress
-              amount={4}
-              passedCount={processTrack.countPassedLocations}
+              amount={processLocations.length}
+              passedCount={currentLocation - 1}
             />
           </div>
         )}
@@ -179,6 +215,7 @@ export default function RouteActive({}: RouteActiveProps) {
             <ControlRouteButton
               onClick={() => {
                 setInProgress(true);
+                setCurrentLocation(1);
               }}
               inProgress={inProgress}
             />

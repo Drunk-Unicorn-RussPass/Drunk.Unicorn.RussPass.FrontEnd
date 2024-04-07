@@ -295,7 +295,12 @@ export const RouteItem: FC<RouteItem> = ({
   }
 
   if (location.processStatus !== LocationProcessStatuses.inWay) {
-    return <BaseRouteItem location={location} isFullSecretTrack />;
+    return (
+      <BaseRouteItem
+        location={location}
+        isFullSecretTrack={isFullSecretTrack}
+      />
+    );
   }
 
   return (
@@ -354,7 +359,7 @@ export const RouteItem: FC<RouteItem> = ({
             </BaseButtons>
             <BaseButtons
               className={buttonStyles + ' border border-natural-5'}
-              onClick={() => {}}
+              onClick={() => onLocationSkip(location.id)}
               variant={'secondary'}
             >
               Пропустить

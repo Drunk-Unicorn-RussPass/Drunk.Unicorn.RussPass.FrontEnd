@@ -6,6 +6,7 @@ import { useCamera } from '@/hooks/useCamera';
 import Image from 'next/image';
 import { CheckInTask } from '@/components/CheckInTask/CheckInTask';
 import { checkIn } from '@/api/requests';
+import { Coins } from '@/components/Coins/Coins';
 
 export type CheckInSidebarProps = {
   isOpen: boolean;
@@ -29,7 +30,10 @@ export const CheckInSidebar: FC<CheckInSidebarProps> = ({
   const [CameraWrapper, img, onClick] = useCamera();
   const onUpload = async () => {
     // const res = await checkIn(img.src, img.name, locationId);
-    onCheckinUpload(locationId);
+    setTimeout(() => {
+      onClose();
+      onCheckinUpload(locationId);
+    }, 500);
   };
 
   return (
@@ -67,9 +71,7 @@ export const CheckInSidebar: FC<CheckInSidebarProps> = ({
                   <CheckInTask locationName={locationName} />
                 </div>
                 <div
-                  className={
-                    'mb-[46px] relative w-full h-[350px] flex items-center justify-center'
-                  }
+                  className={`mb-[${img.src ? 46 : 0}px] relative w-full h-[350px] flex items-center justify-center`}
                 >
                   {!img.src && (
                     <div className={'w-full flex items-center justify-center'}>
@@ -102,6 +104,17 @@ export const CheckInSidebar: FC<CheckInSidebarProps> = ({
                   )}
                 </div>
 
+                {!img.src && (
+                  <div
+                    className={
+                      'flex mb-4 mx-auto flex-col items-center gap-1.5'
+                    }
+                  >
+                    <span className={'font-bold'}>Полезный совет:</span>
+                    <span>Ваша улыбка - лучшая награда за наши труды!</span>
+                  </div>
+                )}
+
                 <div className={'w-full mt-auto'}>
                   <CameraWrapper>
                     <BaseButtons
@@ -110,7 +123,16 @@ export const CheckInSidebar: FC<CheckInSidebarProps> = ({
                       onClick={onClick}
                       variant={img.src ? 'borderedAscent' : 'primary'}
                     >
-                      <span>{img.src ? 'Переснять' : 'Снять фото'}</span>
+                      <span>
+                        {img.src ? (
+                          'Переснять'
+                        ) : (
+                          <div className={'flex gap-2 items-center'}>
+                            <span>Снять фото</span>{' '}
+                            <Coins count={2} withPlaceholder withPlus big />
+                          </div>
+                        )}
+                      </span>
                     </BaseButtons>
                   </CameraWrapper>
                   <BaseButtons
