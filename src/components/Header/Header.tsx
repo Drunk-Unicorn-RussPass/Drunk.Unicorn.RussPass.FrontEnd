@@ -9,7 +9,11 @@ export type HeaderProps = {};
 export const Header: FC<HeaderProps> = ({}) => {
   return (
     <div className={'w-full h-[48px]'}>
-      <div className={'w-full fixed top-0 left-0 right-0 py-1.5'}>
+      <div
+        className={
+          'w-full fixed top-0 left-0 right-0 py-1.5 bg-natural-8 shadow-sm'
+        }
+      >
         <Container>
           <div className={'flex justify-between'}>
             <HeaderLogoIcon />

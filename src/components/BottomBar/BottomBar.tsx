@@ -15,7 +15,7 @@ export const BottomBar: FC<BottomBarProps> = ({
 }) => {
   return (
     <div
-      className={cx('w-full fixed bottom-0 left-0 right-0', {
+      className={cx('w-full fixed bottom-0 left-0 right-0 bg-natural-8', {
         'border-t border-natural-7': Boolean(topSlot),
       })}
     >

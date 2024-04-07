@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { LocationProcessType } from '@/apollo/types';
+import { LocationProcessType } from '@/api/types';
 import { RouteItem } from '@/components/RouteItem/RouteItem';
 
 export type RouteItemsListProps = {

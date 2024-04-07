@@ -41,9 +41,11 @@ export const useCamera = () => {
       <>
         <label htmlFor={inputId}>{children}</label>
         <input
+          style={{
+            display: 'none',
+          }}
           id={inputId}
           type={'file'}
-          className={'hidden'}
           accept="image/*"
           capture="environment"
           onChange={onChange}

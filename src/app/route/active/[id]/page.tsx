@@ -1,16 +1,22 @@
 'use client';
 
 import { useState } from 'react';
-import { PageTitle } from '@/components/ui/Layout/PageTitle/PageTitle';
 import { Header } from '@/components/Header/Header';
 import { BottomBar } from '@/components/BottomBar/BottomBar';
 import { Container } from '@/components/ui/Layout/Container/Container';
 import { Toggler } from '@/components/ui/Toggler/Toggler';
-import { EditRouteButton } from '@/components/EditRouteButton/EditRouteButton';
 import { HiddenPlacesCount } from '@/components/HiddenPlacesCount/HiddenPlacesCount';
-import { LocationProcessStatuses } from '@/apollo/types';
-import { StartRouteButton } from '@/components/StartRouteButton/StartRouteButton';
+import {
+  LocationProcessStatuses,
+  LocationProcessType,
+  ProcessTrack,
+  ProcessTrackStatus,
+} from '@/api/types';
 import { RouteItemsList } from '@/components/RouteItemsList/RouteItemsList';
+import { RouteProgress } from '@/components/RouteProgress/RouteProgress';
+import { ControlRouteButton } from '@/components/ControlRouteButton/ControlRouteButton';
+import { RouteAnalyticBar } from '@/components/RouteAnalyticBar/RouteAnalyticBar';
+import Image from 'next/image';
 
 type RouteActiveProps = {
   params: {
@@ -22,17 +28,98 @@ const tabs = ['План', 'На карте'];
 
 export default function RouteActive({}: RouteActiveProps) {
   const [activeTab, setActiveTab] = useState(tabs[0]);
+  const processTrack: ProcessTrack = {
+    trackId: 123,
+    kk: 123,
+    countPassedLocations: 123,
+    passedCoins: 123,
+    passedSecrets: 123,
+    steps: 123,
+    processStatus: ProcessTrackStatus.inWay,
+  };
+  const processLocations: LocationProcessType[] = [
+    {
+      id: 12366,
+      name: 'Парк Горького',
+      address: 'ул Волхонка, 15, Москва ',
+      category: 'Парки',
+      order: 1,
+      image: 'https://fakeimg.pl/64x64',
+      isVisible: true,
+      reward: 20,
+      processStatus: LocationProcessStatuses.passed,
+      isSecret: false,
+    },
+    {
+      id: 145,
+      name: 'Парк Горького',
+      address: 'ул Волхонка, 15, Москва ',
+      category: 'Парки',
+      order: 1,
+      image: 'https://fakeimg.pl/64x64',
+      isVisible: true,
+      reward: 20,
+      processStatus: LocationProcessStatuses.verificationProcess,
+      isSecret: true,
+    },
+    {
+      id: 123,
+      name: 'Парк Горького',
+      address: 'ул Волхонка, 15, Москва ',
+      category: 'Парки',
+      order: 1,
+      image: 'https://fakeimg.pl/64x64',
+      isVisible: true,
+      reward: 20,
+      processStatus: LocationProcessStatuses.inWay,
+      isSecret: true,
+    },
+    {
+      id: 123996,
+      name: 'Парк Горького',
+      address: 'ул Волхонка, 15, Москва ',
+      category: 'Парки',
+      order: 1,
+      image: 'https://fakeimg.pl/64x64',
+      isVisible: true,
+      reward: 20,
+      processStatus: LocationProcessStatuses.none,
+      isSecret: false,
+    },
+  ];
+  const secretsAmount = (() => {
+    let amount = 0;
+
+    processLocations.forEach((processLocation) => {
+      if (processLocation.isSecret) {
+        amount++;
+      }
+    });
+
+    return amount;
+  })();
+  const isTrackInProcess =
+    processTrack.processStatus === ProcessTrackStatus.inWay;
 
   return (
-    <main>
+    <main className={'pb-[168px]'}>
       <Header />
       <Container>
-        <div className={'pt-4 mb-3'}>
-          <PageTitle title={'Отредактируйте маршрут'} />
-        </div>
+        {/*<div className={'pt-4 mb-3'}>*/}
+        {/*  <PageTitle title={'Отредактируйте маршрут'} />*/}
+        {/*</div>*/}
 
-        <div className={'py-2 mb-1.5'}>
-          <EditRouteButton onClick={() => {}} />
+        {/*<div className={'py-2 mb-1.5'}>*/}
+        {/*  <EditRouteButton onClick={() => {}} />*/}
+        {/*</div>*/}
+        <div className={'py-5'}>
+          <RouteAnalyticBar
+            coins={processTrack.passedCoins}
+            amountSecret={secretsAmount}
+            kk={processTrack.kk}
+            passedSecret={processTrack.passedSecrets}
+            steps={processTrack.steps}
+          />
         </div>
 
         <Toggler
@@ -40,38 +127,42 @@ export default function RouteActive({}: RouteActiveProps) {
           onChangeVariant={setActiveTab}
           activeVariant={activeTab}
         />
-        <div className={'py-3'}>
-          <HiddenPlacesCount count={1} />
+
+        <div className={'pt-3 pb-2'}>
+          <RouteProgress
+            amount={4}
+            passedCount={processTrack.countPassedLocations}
+          />
         </div>
 
-        <RouteItemsList
-          locations={[
-            {
-              id: 123,
-              name: 'Парк Горького',
-              address: 'ул Волхонка, 15, Москва ',
-              category: 'Парки',
-              order: 1,
-              image: 'https://fakeimg.pl/64x64',
-              isVisible: true,
-              reward: 20,
-              processStatus: LocationProcessStatuses.noPassed,
-            },
-            {
-              id: 145,
-              name: 'Парк Горького',
-              address: 'ул Волхонка, 15, Москва ',
-              category: 'Парки',
-              order: 1,
-              image: 'https://fakeimg.pl/64x64',
-              isVisible: true,
-              reward: 20,
-              processStatus: LocationProcessStatuses.inWay,
-            },
-          ]}
-        />
+        {activeTab === tabs[1] ? (
+          <div
+            style={{
+              width: 'calc(100% + 32px)',
+            }}
+            className={'relative w-full h-[526px] my-3 mx-[-16px]'}
+          >
+            <Image src={'/img/map.png'} alt={'map'} layout={'fill'} />
+          </div>
+        ) : (
+          <>
+            {processTrack.processStatus === ProcessTrackStatus.none && (
+              <div className={'py-3'}>
+                <HiddenPlacesCount count={secretsAmount} />
+              </div>
+            )}
+
+            <RouteItemsList locations={processLocations} />
+          </>
+        )}
       </Container>
-      <BottomBar topSlot={<StartRouteButton onClick={() => {}} />} />
+      <BottomBar
+        topSlot={
+          !isTrackInProcess ? (
+            <ControlRouteButton onClick={() => {}} inProgress={true} />
+          ) : null
+        }
+      />
     </main>
   );
 }
