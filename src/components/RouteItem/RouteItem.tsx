@@ -5,6 +5,119 @@ import { CheckInSidebar } from '@/components/CheckInSidebar/CheckInSidebar';
 import Image from 'next/image';
 import IncognitoIcon from '@/assets/icons/incognito.svg';
 import { Coins } from '@/components/Coins/Coins';
+import BluredLoactionIcon from '@/assets/icons/bluredLocation.svg';
+
+const RouteItemSceleton: FC = () => {
+  return (
+    <div className={'flex flex-col gap-1'}>
+      <div>
+        <svg
+          width="90"
+          height="12"
+          viewBox="0 0 90 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="6" height="6" fill="#D9D9D9" />
+          <rect y="6" width="6" height="6" fill="#C1C1C1" />
+          <rect x="6" width="6" height="6" fill="#C1C1C1" />
+          <rect x="6" y="6" width="6" height="6" fill="#E4E4E4" />
+          <rect x="12" width="6" height="6" fill="#E4E4E4" />
+          <rect x="12" y="6" width="6" height="6" fill="#D9D9D9" />
+          <rect x="18" width="6" height="6" fill="#C1C1C1" />
+          <rect x="18" y="6" width="6" height="6" fill="#E4E4E4" />
+          <rect x="24" width="6" height="6" fill="#E4E4E4" />
+          <rect x="24" y="6" width="6" height="6" fill="#D9D9D9" />
+          <rect x="30" width="6" height="6" fill="#E4E4E4" />
+          <rect x="30" y="6" width="6" height="6" fill="#C1C1C1" />
+          <rect x="36" width="6" height="6" fill="#E4E4E4" />
+          <rect x="36" y="6" width="6" height="6" fill="#D9D9D9" />
+          <rect x="42" width="6" height="6" fill="#E4E4E4" />
+          <rect x="42" y="6" width="6" height="6" fill="#D9D9D9" />
+          <rect x="48" width="6" height="6" fill="#C1C1C1" />
+          <rect x="48" y="6" width="6" height="6" fill="#E4E4E4" />
+          <rect x="54" width="6" height="6" fill="#E4E4E4" />
+          <rect x="54" y="6" width="6" height="6" fill="#D9D9D9" />
+          <rect x="60" width="6" height="6" fill="#C1C1C1" />
+          <rect x="60" y="6" width="6" height="6" fill="#E4E4E4" />
+          <rect x="66" width="6" height="6" fill="#E4E4E4" />
+          <rect x="66" y="6" width="6" height="6" fill="#D9D9D9" />
+          <rect x="72" width="6" height="6" fill="#C1C1C1" />
+          <rect x="72" y="6" width="6" height="6" fill="#E4E4E4" />
+          <rect x="78" width="6" height="6" fill="#C1C1C1" />
+          <rect x="78" y="6" width="6" height="6" fill="#E4E4E4" />
+          <rect x="84" width="6" height="6" fill="#E4E4E4" />
+          <rect x="84" y="6" width="6" height="6" fill="#D9D9D9" />
+        </svg>
+      </div>
+
+      <div>
+        <svg
+          width="108"
+          height="18"
+          viewBox="0 0 108 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="6" height="6" fill="#D9D9D9" />
+          <rect y="6" width="6" height="6" fill="#C1C1C1" />
+          <rect y="12" width="6" height="6" fill="#E4E4E4" />
+          <rect x="6" width="6" height="6" fill="#C1C1C1" />
+          <rect x="6" y="6" width="6" height="6" fill="#E4E4E4" />
+          <rect x="6" y="12" width="6" height="6" fill="#D9D9D9" />
+          <rect x="12" width="6" height="6" fill="#E4E4E4" />
+          <rect x="12" y="6" width="6" height="6" fill="#D9D9D9" />
+          <rect x="12" y="12" width="6" height="6" fill="#C1C1C1" />
+          <rect x="18" width="6" height="6" fill="#C1C1C1" />
+          <rect x="18" y="6" width="6" height="6" fill="#E4E4E4" />
+          <rect x="18" y="12" width="6" height="6" fill="#D9D9D9" />
+          <rect x="24" width="6" height="6" fill="#E4E4E4" />
+          <rect x="24" y="6" width="6" height="6" fill="#D9D9D9" />
+          <rect x="24" y="12" width="6" height="6" fill="#C1C1C1" />
+          <rect x="30" width="6" height="6" fill="#E4E4E4" />
+          <rect x="30" y="6" width="6" height="6" fill="#C1C1C1" />
+          <rect x="30" y="12" width="6" height="6" fill="#D9D9D9" />
+          <rect x="36" width="6" height="6" fill="#E4E4E4" />
+          <rect x="36" y="6" width="6" height="6" fill="#D9D9D9" />
+          <rect x="36" y="12" width="6" height="6" fill="#C1C1C1" />
+          <rect x="42" width="6" height="6" fill="#E4E4E4" />
+          <rect x="42" y="6" width="6" height="6" fill="#D9D9D9" />
+          <rect x="42" y="12" width="6" height="6" fill="#C1C1C1" />
+          <rect x="48" width="6" height="6" fill="#C1C1C1" />
+          <rect x="48" y="6" width="6" height="6" fill="#E4E4E4" />
+          <rect x="48" y="12" width="6" height="6" fill="#D9D9D9" />
+          <rect x="54" width="6" height="6" fill="#E4E4E4" />
+          <rect x="54" y="6" width="6" height="6" fill="#D9D9D9" />
+          <rect x="54" y="12" width="6" height="6" fill="#C1C1C1" />
+          <rect x="60" width="6" height="6" fill="#C1C1C1" />
+          <rect x="60" y="6" width="6" height="6" fill="#E4E4E4" />
+          <rect x="60" y="12" width="6" height="6" fill="#D9D9D9" />
+          <rect x="66" width="6" height="6" fill="#E4E4E4" />
+          <rect x="66" y="6" width="6" height="6" fill="#D9D9D9" />
+          <rect x="66" y="12" width="6" height="6" fill="#C1C1C1" />
+          <rect x="72" width="6" height="6" fill="#C1C1C1" />
+          <rect x="72" y="6" width="6" height="6" fill="#E4E4E4" />
+          <rect x="72" y="12" width="6" height="6" fill="#D9D9D9" />
+          <rect x="78" width="6" height="6" fill="#C1C1C1" />
+          <rect x="78" y="6" width="6" height="6" fill="#E4E4E4" />
+          <rect x="78" y="12" width="6" height="6" fill="#D9D9D9" />
+          <rect x="84" width="6" height="6" fill="#E4E4E4" />
+          <rect x="84" y="6" width="6" height="6" fill="#D9D9D9" />
+          <rect x="84" y="12" width="6" height="6" fill="#C1C1C1" />
+          <rect x="90" width="6" height="6" fill="#C1C1C1" />
+          <rect x="90" y="6" width="6" height="6" fill="#E4E4E4" />
+          <rect x="90" y="12" width="6" height="6" fill="#D9D9D9" />
+          <rect x="96" width="6" height="6" fill="#C1C1C1" />
+          <rect x="96" y="6" width="6" height="6" fill="#E4E4E4" />
+          <rect x="96" y="12" width="6" height="6" fill="#D9D9D9" />
+          <rect x="102" width="6" height="6" fill="#D9D9D9" />
+          <rect x="102" y="6" width="6" height="6" fill="#C1C1C1" />
+          <rect x="102" y="12" width="6" height="6" fill="#E4E4E4" />
+        </svg>
+      </div>
+    </div>
+  );
+};
 
 const LocationStatusBadge: FC<{ status: LocationProcessStatuses }> = ({
   status,
@@ -72,22 +185,32 @@ const SecretSlot: FC = () => {
 type BaseRouteItemProps = {
   location: LocationProcessType;
   compactMode?: boolean;
+  isFullSecretTrack: boolean;
 };
 
 const BaseRouteItem: FC<BaseRouteItemProps> = ({
   location,
   compactMode = false,
+  isFullSecretTrack,
 }) => {
+  const isBlured =
+    location.processStatus === LocationProcessStatuses.none &&
+    isFullSecretTrack;
+
   return (
     <div className={'flex gap-4 relative'}>
       <div className={'relative'}>
-        <Image
-          alt={'image'}
-          width={64}
-          height={64}
-          src={location.image}
-          className={'size-[64px] rounded-[12px]'}
-        />
+        {isBlured ? (
+          <BluredLoactionIcon />
+        ) : (
+          <Image
+            alt={'image'}
+            width={64}
+            height={64}
+            src={location.image}
+            className={'size-[64px] rounded-[12px]'}
+          />
+        )}
         <div
           className={'absolute bottom-[-8px] left-[50%] translate-x-[-50%] '}
         >
@@ -96,11 +219,17 @@ const BaseRouteItem: FC<BaseRouteItemProps> = ({
       </div>
 
       <div className={'flex flex-col justify-between'}>
-        <div className={'text-natural-3 text-xs'}>
-          <span>{location.category}</span>
-        </div>
-        <h3>{location.name}</h3>
-        <span className={'text-natural-3 text-xs'}>{location.address}</span>
+        {isBlured ? (
+          <RouteItemSceleton />
+        ) : (
+          <>
+            <div className={'text-natural-3 text-xs'}>
+              <span>{location.category}</span>
+            </div>
+            <h3>{location.name}</h3>
+            <span className={'text-natural-3 text-xs'}>{location.address}</span>
+          </>
+        )}
       </div>
 
       {!compactMode && (
@@ -146,11 +275,19 @@ const BaseRouteItem: FC<BaseRouteItemProps> = ({
 
 export type RouteItem = {
   location: LocationProcessType;
+  isFullSecretTrack: boolean;
+  onCheckinUpload: (locationId: number) => void;
+  onLocationSkip: (locationId: number) => void;
 };
 
 const buttonStyles = 'w-full h-9 flex items-center justify-center';
 
-export const RouteItem: FC<RouteItem> = ({ location }) => {
+export const RouteItem: FC<RouteItem> = ({
+  location,
+  isFullSecretTrack,
+  onCheckinUpload,
+  onLocationSkip,
+}) => {
   const [inCheckIn, setInCheckIn] = useState(false);
 
   if (!location.isVisible) {
@@ -158,7 +295,7 @@ export const RouteItem: FC<RouteItem> = ({ location }) => {
   }
 
   if (location.processStatus !== LocationProcessStatuses.inWay) {
-    return <BaseRouteItem location={location} />;
+    return <BaseRouteItem location={location} isFullSecretTrack />;
   }
 
   return (
@@ -201,7 +338,11 @@ export const RouteItem: FC<RouteItem> = ({ location }) => {
           </div>
 
           <div className={'mb-3'}>
-            <BaseRouteItem location={location} compactMode />
+            <BaseRouteItem
+              location={location}
+              compactMode
+              isFullSecretTrack={isFullSecretTrack}
+            />
           </div>
 
           <div className={'w-full flex flex-col gap-1'}>
@@ -227,6 +368,8 @@ export const RouteItem: FC<RouteItem> = ({ location }) => {
         onClose={() => setInCheckIn(false)}
         locationName={location.name}
         locationId={location.id}
+        onCheckinUpload={onCheckinUpload}
+        onLocationSkip={onLocationSkip}
       ></CheckInSidebar>
     </>
   );

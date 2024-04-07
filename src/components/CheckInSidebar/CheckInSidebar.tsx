@@ -12,6 +12,8 @@ export type CheckInSidebarProps = {
   onClose: () => void;
   locationName: string;
   locationId: number;
+  onCheckinUpload: (locationId: number) => void;
+  onLocationSkip: (locationId: number) => void;
 };
 
 const buttonClass = 'w-full h-12 text-base font-semibold';
@@ -21,10 +23,13 @@ export const CheckInSidebar: FC<CheckInSidebarProps> = ({
   onClose,
   locationName,
   locationId,
+  onCheckinUpload,
+  onLocationSkip,
 }) => {
   const [CameraWrapper, img, onClick] = useCamera();
   const onUpload = async () => {
-    const res = await checkIn(img.src, img.name, locationId);
+    // const res = await checkIn(img.src, img.name, locationId);
+    onCheckinUpload(locationId);
   };
 
   return (
@@ -109,7 +114,13 @@ export const CheckInSidebar: FC<CheckInSidebarProps> = ({
                     </BaseButtons>
                   </CameraWrapper>
                   <BaseButtons
-                    onClick={img.src ? onUpload : () => {}}
+                    onClick={
+                      img.src
+                        ? onUpload
+                        : () => {
+                            onLocationSkip(locationId);
+                          }
+                    }
                     variant={img.src ? 'primary' : 'bordered'}
                     centeredContent
                     className={buttonClass}

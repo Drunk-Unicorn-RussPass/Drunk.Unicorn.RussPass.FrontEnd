@@ -105,19 +105,22 @@ export default function RouteActive({}: RouteActiveProps) {
   })();
   const isTrackInProcess =
     processTrack.processStatus === ProcessTrackStatus.inWay;
+  const onNextLocation = async (prevLocationId: number) => {
+    //   обновляем процессы
+  };
+  const onSkipLocation = async (id: number) => {
+    //   вызываем метод api
+    onNextLocation(id);
+  };
+  const onCheckinUpload = (locationId: number) => {
+    onNextLocation(locationId);
+  };
 
   return (
     <main className={'pb-[168px] pt-5'}>
       <Header />
       <Container>
-        {/*<div className={'pt-4 mb-3'}>*/}
-        {/*  <PageTitle title={'Отредактируйте маршрут'} />*/}
-        {/*</div>*/}
-
-        {/*<div className={'py-2 mb-1.5'}>*/}
-        {/*  <EditRouteButton onClick={() => {}} />*/}
-        {/*</div>*/}
-        {!(processTrack.processStatus !== ProcessTrackStatus.inWay) && (
+        {processTrack.processStatus !== ProcessTrackStatus.none && (
           <div className={'pb-5'}>
             <RouteAnalyticBar
               coins={processTrack.passedCoins}
@@ -135,12 +138,14 @@ export default function RouteActive({}: RouteActiveProps) {
           activeVariant={activeTab}
         />
 
-        <div className={'pt-3 pb-2'}>
-          <RouteProgress
-            amount={4}
-            passedCount={processTrack.countPassedLocations}
-          />
-        </div>
+        {processTrack.processStatus !== ProcessTrackStatus.none && (
+          <div className={'pt-3 pb-2'}>
+            <RouteProgress
+              amount={4}
+              passedCount={processTrack.countPassedLocations}
+            />
+          </div>
+        )}
 
         {activeTab === tabs[1] ? (
           <div
@@ -159,7 +164,12 @@ export default function RouteActive({}: RouteActiveProps) {
               </div>
             )}
 
-            <RouteItemsList locations={processLocations} />
+            <RouteItemsList
+              locations={processLocations}
+              isFullSecretTrack={false}
+              onCheckinUpload={onCheckinUpload}
+              onLocationSkip={onSkipLocation}
+            />
           </>
         )}
       </Container>
