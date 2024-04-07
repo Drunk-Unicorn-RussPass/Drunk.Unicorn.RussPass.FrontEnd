@@ -5,7 +5,6 @@ import { CheckInSidebar } from '@/components/CheckInSidebar/CheckInSidebar';
 import Image from 'next/image';
 import IncognitoIcon from '@/assets/icons/incognito.svg';
 import { Coins } from '@/components/Coins/Coins';
-import BluredLoactionIcon from '@/assets/icons/bluredLocation.svg';
 
 const RouteItemSceleton: FC = () => {
   return (
@@ -200,17 +199,14 @@ const BaseRouteItem: FC<BaseRouteItemProps> = ({
   return (
     <div className={'flex gap-4 relative'}>
       <div className={'relative'}>
-        {isBlured ? (
-          <BluredLoactionIcon />
-        ) : (
-          <Image
-            alt={'image'}
-            width={64}
-            height={64}
-            src={location.image}
-            className={'size-[64px] rounded-[12px]'}
-          />
-        )}
+        <Image
+          alt={'image'}
+          width={64}
+          height={64}
+          src={location.image}
+          className={'size-[64px] rounded-[12px]'}
+        />
+
         <div
           className={'absolute bottom-[-8px] left-[50%] translate-x-[-50%] '}
         >
