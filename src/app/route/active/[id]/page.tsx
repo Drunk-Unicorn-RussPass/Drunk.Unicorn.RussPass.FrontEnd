@@ -29,6 +29,7 @@ const tabs = ['План', 'На карте'];
 
 export default function RouteActive({}: RouteActiveProps) {
   const [activeTab, setActiveTab] = useState(tabs[0]);
+  const [inProgress, setInProgress] = useState(false);
   const processTrack: ProcessTrack = {
     trackId: 123,
     kk: 123,
@@ -36,7 +37,9 @@ export default function RouteActive({}: RouteActiveProps) {
     passedCoins: 123,
     passedSecrets: 123,
     steps: 123,
-    processStatus: ProcessTrackStatus.inWay,
+    processStatus: inProgress
+      ? ProcessTrackStatus.inWay
+      : ProcessTrackStatus.none,
   };
   const processLocations: LocationProcessType[] = [
     {
@@ -72,7 +75,7 @@ export default function RouteActive({}: RouteActiveProps) {
       image: 'http://fakeimg.pl/64x64',
       isVisible: true,
       reward: 20,
-      processStatus: LocationProcessStatuses.inWay,
+      processStatus: LocationProcessStatuses.none,
       isSecret: true,
     },
     {
@@ -103,7 +106,7 @@ export default function RouteActive({}: RouteActiveProps) {
     processTrack.processStatus === ProcessTrackStatus.inWay;
 
   return (
-    <main className={'pb-[168px]'}>
+    <main className={'pb-[168px] pt-5'}>
       <Header />
       <Container>
         {/*<div className={'pt-4 mb-3'}>*/}
@@ -113,15 +116,17 @@ export default function RouteActive({}: RouteActiveProps) {
         {/*<div className={'py-2 mb-1.5'}>*/}
         {/*  <EditRouteButton onClick={() => {}} />*/}
         {/*</div>*/}
-        <div className={'py-5'}>
-          <RouteAnalyticBar
-            coins={processTrack.passedCoins}
-            amountSecret={secretsAmount}
-            kk={processTrack.kk}
-            passedSecret={processTrack.passedSecrets}
-            steps={processTrack.steps}
-          />
-        </div>
+        {!(processTrack.processStatus !== ProcessTrackStatus.inWay) && (
+          <div className={'pb-5'}>
+            <RouteAnalyticBar
+              coins={processTrack.passedCoins}
+              amountSecret={secretsAmount}
+              kk={processTrack.kk}
+              passedSecret={processTrack.passedSecrets}
+              steps={processTrack.steps}
+            />
+          </div>
+        )}
 
         <Toggler
           variants={tabs}
@@ -160,7 +165,12 @@ export default function RouteActive({}: RouteActiveProps) {
       <BottomBar
         topSlot={
           !isTrackInProcess ? (
-            <ControlRouteButton onClick={() => {}} inProgress={true} />
+            <ControlRouteButton
+              onClick={() => {
+                setInProgress(true);
+              }}
+              inProgress={inProgress}
+            />
           ) : null
         }
       />
