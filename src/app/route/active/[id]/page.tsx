@@ -56,7 +56,7 @@ export default function RouteActive({}: RouteActiveProps) {
     },
     {
       id: 145,
-      name: 'Парк Горького',
+      name: 'Памятник единоржки',
       address: 'ул Волхонка, 15, Москва ',
       category: 'Парки',
       order: 1,
