@@ -11,7 +11,10 @@ type ImgSrcType = string | ArrayBuffer | null | undefined;
 type WrapperType = FC<PropsWithChildren>;
 
 export const useCamera = () => {
-  const [imgSrc, setImgSrc] = useState<ImgSrcType>(null);
+  const [imgData, setImgData] = useState<{ src: ImgSrcType; name: string }>({
+    src: '',
+    name: '',
+  });
   const inputRef = useRef<HTMLInputElement>(null);
   const inputId = useId();
 
@@ -26,7 +29,8 @@ export const useCamera = () => {
     reader.onload = function (e) {
       // Пример создания HTML img элемента с выбранным изображением
       const imgSrc = e.target?.result;
-      setImgSrc(imgSrc);
+
+      setImgData({ src: imgSrc, name: file.name });
     };
 
     reader.readAsDataURL(file);
@@ -55,5 +59,9 @@ export const useCamera = () => {
     );
   };
 
-  return [Wrapper, imgSrc, onClick] as [WrapperType, ImgSrcType, () => void];
+  return [Wrapper, imgData, onClick] as [
+    WrapperType,
+    { src: ImgSrcType; name: string },
+    () => void,
+  ];
 };

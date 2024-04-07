@@ -5,11 +5,13 @@ import { BaseButtons } from '@/components/ui/Buttons/BaseButton/BaseButtons';
 import { useCamera } from '@/hooks/useCamera';
 import Image from 'next/image';
 import { CheckInTask } from '@/components/CheckInTask/CheckInTask';
+import { checkIn } from '@/api/requests';
 
 export type CheckInSidebarProps = {
   isOpen: boolean;
   onClose: () => void;
   locationName: string;
+  locationId: number;
 };
 
 const buttonClass = 'w-full h-12 text-base font-semibold';
@@ -18,8 +20,12 @@ export const CheckInSidebar: FC<CheckInSidebarProps> = ({
   isOpen,
   onClose,
   locationName,
+  locationId,
 }) => {
-  const [CameraWrapper, imgSrc, onClick] = useCamera();
+  const [CameraWrapper, img, onClick] = useCamera();
+  const onUpload = async () => {
+    const res = await checkIn(img.src, img.name, locationId);
+  };
 
   return (
     <div>
@@ -60,7 +66,7 @@ export const CheckInSidebar: FC<CheckInSidebarProps> = ({
                     'mb-[46px] relative w-full h-[350px] flex items-center justify-center'
                   }
                 >
-                  {!imgSrc && (
+                  {!img.src && (
                     <div className={'w-full flex items-center justify-center'}>
                       <svg
                         width="120"
@@ -81,9 +87,9 @@ export const CheckInSidebar: FC<CheckInSidebarProps> = ({
                     </div>
                   )}
 
-                  {imgSrc && (
+                  {img.src && (
                     <Image
-                      src={imgSrc as string}
+                      src={img.src as string}
                       alt={''}
                       layout="fill"
                       objectFit="contain"
@@ -97,18 +103,18 @@ export const CheckInSidebar: FC<CheckInSidebarProps> = ({
                       className={buttonClass + ' mb-2'}
                       centeredContent
                       onClick={onClick}
-                      variant={imgSrc ? 'borderedAscent' : 'primary'}
+                      variant={img.src ? 'borderedAscent' : 'primary'}
                     >
-                      <span>{imgSrc ? 'Переснять' : 'Снять фото'}</span>
+                      <span>{img.src ? 'Переснять' : 'Снять фото'}</span>
                     </BaseButtons>
                   </CameraWrapper>
                   <BaseButtons
-                    onClick={() => {}}
-                    variant={imgSrc ? 'primary' : 'bordered'}
+                    onClick={img.src ? onUpload : () => {}}
+                    variant={img.src ? 'primary' : 'bordered'}
                     centeredContent
                     className={buttonClass}
                   >
-                    {imgSrc ? 'Загрузить' : 'Пропустить'}
+                    {img.src ? 'Загрузить' : 'Пропустить'}
                   </BaseButtons>
                 </div>
               </div>

@@ -153,6 +153,10 @@ const buttonStyles = 'w-full h-9 flex items-center justify-center';
 export const RouteItem: FC<RouteItem> = ({ location }) => {
   const [inCheckIn, setInCheckIn] = useState(false);
 
+  if (!location.isVisible) {
+    return null;
+  }
+
   if (location.processStatus !== LocationProcessStatuses.inWay) {
     return <BaseRouteItem location={location} />;
   }
@@ -222,6 +226,7 @@ export const RouteItem: FC<RouteItem> = ({ location }) => {
         isOpen={inCheckIn}
         onClose={() => setInCheckIn(false)}
         locationName={location.name}
+        locationId={location.id}
       ></CheckInSidebar>
     </>
   );

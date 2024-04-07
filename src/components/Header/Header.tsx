@@ -11,7 +11,7 @@ export const Header: FC<HeaderProps> = ({}) => {
     <div className={'w-full h-[48px]'}>
       <div
         className={
-          'w-full fixed top-0 left-0 right-0 py-1.5 bg-natural-8 shadow-sm'
+          'w-full fixed top-0 left-0 right-0 py-1.5 bg-natural-8 shadow-sm z-10'
         }
       >
         <Container>

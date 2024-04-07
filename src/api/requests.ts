@@ -12,3 +12,18 @@ export const getProcessLocationsByTrackId = async (
     `Progress/locations?trackId=${trackId}`,
   );
 };
+
+export const checkIn = (
+  fileSrc: ImgSrcType,
+  fileName: string,
+  locationId: number,
+) => {
+  const formData = new FormData();
+  formData.append('fileSrc', String(fileSrc));
+  formData.append('fileName', fileName);
+  formData.append('locationId', String(locationId));
+
+  return fetcher.post('checkIn', {
+    body: formData,
+  });
+};
