@@ -14,7 +14,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={'font-suisseIntl text-sm text-natural-1'}>
-        {children}
+        <div className={'max-w-[545px] mx-auto'}>{children}</div>
       </body>
     </html>
   );
