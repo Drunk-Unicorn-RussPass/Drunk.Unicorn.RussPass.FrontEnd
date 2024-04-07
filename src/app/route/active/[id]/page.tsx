@@ -17,7 +17,7 @@ import { RouteProgress } from '@/components/RouteProgress/RouteProgress';
 import { ControlRouteButton } from '@/components/ControlRouteButton/ControlRouteButton';
 import { RouteAnalyticBar } from '@/components/RouteAnalyticBar/RouteAnalyticBar';
 import Image from 'next/image';
-import mapImg from '@/assets/img/map.png';
+import mapImg from '../../../../../public/img/map.png';
 
 type RouteActiveProps = {
   params: {
@@ -143,7 +143,7 @@ export default function RouteActive({}: RouteActiveProps) {
             }}
             className={'relative w-full h-[526px] my-3 mx-[-16px]'}
           >
-            <Image src={mapImg} alt={'map'} layout={'fill'} />
+            <Image src={'/img/map.png'} alt={'map'} layout={'fill'} />
           </div>
         ) : (
           <>
