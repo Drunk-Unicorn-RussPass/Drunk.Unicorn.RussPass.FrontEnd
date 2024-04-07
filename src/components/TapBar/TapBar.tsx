@@ -4,6 +4,7 @@ import LogoIcon from '@/assets/icons/logo.svg';
 import HeartIcon from '@/assets/icons/heart.svg';
 import BurgerIcon from '@/assets/icons/burger.svg';
 import RouteIcon from '@/assets/icons/route.svg';
+import ActionsIcon from '@/assets/icons/actions.svg';
 import { RootRoutes } from '@/app/routes';
 import Link from 'next/link';
 
@@ -23,6 +24,11 @@ const routs: RoutsType[] = [
     icon: <BurgerIcon />,
     name: 'Каталог',
     path: RootRoutes.catalog,
+  },
+  {
+    icon: <ActionsIcon />,
+    name: 'События',
+    path: RootRoutes.actions,
   },
   {
     icon: <RouteIcon />,
@@ -46,10 +52,13 @@ const RouteItem: FC<RouteItemProps> = ({ route, isSelected }) => {
     <li>
       <Link
         href={`/${route.path}`}
-        className={cx('flex flex-col items-center text-xs leading-snug', {
-          'text-natural-1': isSelected,
-          'text-natural-4': !isSelected,
-        })}
+        className={cx(
+          'flex w-[69px] flex-col items-center text-xs leading-snug',
+          {
+            'text-natural-1': isSelected,
+            'text-natural-4': !isSelected,
+          },
+        )}
       >
         <span className={'pb-1'}>{route.icon}</span> <span>{route.name}</span>
       </Link>
@@ -63,7 +72,7 @@ export type TapBarProps = {
 
 export const TapBar: FC<TapBarProps> = ({ currentRoutePath }) => {
   return (
-    <ul className={'grid grid-cols-4 pt-1.5 pb-3'}>
+    <ul className={'grid grid-cols-5 pt-1.5 pb-3 px-[14px]'}>
       {routs.map((route) => {
         return (
           <RouteItem

@@ -3,4 +3,5 @@ export enum RootRoutes {
   catalog = 'catalog',
   routes = 'route',
   favourites = 'favourites',
+  actions = 'actions',
 }
