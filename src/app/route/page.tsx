@@ -5,6 +5,7 @@ import { PageTitle } from '@/components/ui/Layout/PageTitle/PageTitle';
 import { Container } from '@/components/ui/Layout/Container/Container';
 import Image from 'next/image';
 import Link from 'next/link';
+import routCardImg from '@/assets/img/route-card.png';
 
 export default function Route() {
   return (
@@ -142,36 +143,16 @@ export default function Route() {
         </div>
         <div className={'pb-[80px] flex flex-col items-center gap-2'}>
           <Link href={'/route/active/1'}>
-            <Image
-              src={'/img/route-card.png'}
-              alt={'route'}
-              width={343}
-              height={425}
-            />
+            <Image src={routCardImg} alt={'route'} width={343} height={425} />
           </Link>
           <Link href={'/route/active/1'}>
-            <Image
-              src={'/img/route-card.png'}
-              alt={'route'}
-              width={343}
-              height={425}
-            />
+            <Image src={routCardImg} alt={'route'} width={343} height={425} />
           </Link>
           <Link href={'/route/active/1'}>
-            <Image
-              src={'/img/route-card.png'}
-              alt={'route'}
-              width={343}
-              height={425}
-            />
+            <Image src={routCardImg} alt={'route'} width={343} height={425} />
           </Link>
           <Link href={'/route/active/1'}>
-            <Image
-              src={'/img/route-card.png'}
-              alt={'route'}
-              width={343}
-              height={425}
-            />
+            <Image src={routCardImg} alt={'route'} width={343} height={425} />
           </Link>
         </div>
       </Container>
